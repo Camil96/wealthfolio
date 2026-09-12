@@ -71,7 +71,7 @@ export function AppSidebar({ navigation }: AppSidebarProps) {
                       },
                     )}
                   >
-                    Wealthfolio
+                    Camilfolio
                   </span>
                 </div>
 

@@ -1,3 +1,9 @@
+> **Camilfolio — fork-notitie.** Dit is een persoonlijke fork van
+> [Wealthfolio](https://github.com/wealthfolio/wealthfolio) onder de naam **Camilfolio**
+> (eigen naam/logo, eis uit `TRADEMARKS.md`). Fork-specifieke docs:
+> [`docs/CAMIL-FORK.md`](docs/CAMIL-FORK.md), wijzigingen: [`CHANGELOG-CAMIL.md`](CHANGELOG-CAMIL.md).
+> “Wealthfolio is a trademark of Teymz Inc.” Code-licentie: AGPL-3.0.
+
 <div align="center">
   <a href="https://github.com/wealthfolio/wealthfolio">
     <img src="assets/brand/icon.png" alt="Logo" width="80" height="80">
@@ -847,3 +853,23 @@ licensed under AGPL-3.0; trademarks are not granted under that license.
 ## [![Star History Chart](https://api.star-history.com/svg?repos=wealthfolio/wealthfolio&type=Timeline)](https://star-history.com/#wealthfolio/wealthfolio&Date)
 
 Enjoy managing your wealth with **Wealthfolio**! 🚀
+
+---
+
+## Camilfolio — snelstart (fork)
+
+```bash
+eval "$(fnm env)"; export PATH="/opt/homebrew/opt/rustup/bin:$PATH"  # Node 24 + Rust 1.95
+pnpm install && pnpm run build:types
+cp -n .env.example .env; cp -n .env.web.example .env.web  # zet WF_SECRET_KEY (openssl rand -base64 32)
+pnpm run dev:web     # Vite http://localhost:1420 + API http://127.0.0.1:8088
+```
+
+Docker (bouwt image uit deze fork):
+
+```bash
+docker compose --env-file .env.docker -f compose.yml -f compose.camilfolio.yml up -d --build
+# open http://localhost:8088
+```
+
+Upstream bijwerken zonder eigen werk te verliezen: zie `CHANGELOG-CAMIL.md` (workflow).

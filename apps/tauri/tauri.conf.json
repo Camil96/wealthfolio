@@ -39,8 +39,8 @@
       }
     }
   },
-  "productName": "Wealthfolio",
-  "mainBinaryName": "Wealthfolio",
+  "productName": "Camilfolio",
+  "mainBinaryName": "Camilfolio",
   "version": "3.9.0",
   "identifier": "com.teymz.wealthfolio",
   "plugins": {
@@ -74,7 +74,7 @@
         "theme": "Light",
         "titleBarStyle": "Overlay",
         "hiddenTitle": true,
-        "title": "Wealthfolio",
+        "title": "Camilfolio",
         "width": 1440,
         "height": 960
       }
