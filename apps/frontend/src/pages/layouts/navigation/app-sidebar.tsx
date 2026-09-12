@@ -26,7 +26,7 @@ const modKey = isAppleDevice() ? "⌘" : "Ctrl";
 
 export function AppSidebar({ navigation }: AppSidebarProps) {
   const { t } = useTranslation();
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
   const { logout, requiresAuth } = useAuth();
   const addonMenuItems = navigation?.addonMenuItems ?? navigation?.addons ?? [];
 
@@ -64,7 +64,7 @@ export function AppSidebar({ navigation }: AppSidebarProps) {
 
                   <span
                     className={cn(
-                      "text-md text-foreground/90 ml-2 font-serif text-xl font-bold transition-opacity delay-100 duration-300 ease-in-out",
+                      "text-md text-foreground/90 ml-2 font-sans text-xl font-bold transition-opacity delay-100 duration-300 ease-in-out",
                       {
                         "sr-only opacity-0": collapsed,
                         "block opacity-100": !collapsed,
@@ -263,6 +263,9 @@ function NavItem({ item, collapsed, className, ...props }: NavItemProps) {
       className={cn(
         "text-foreground [&_svg]:size-5! mb-1 h-12 rounded-md transition-all duration-300",
         collapsed ? "justify-center" : "justify-start",
+        // Camilfolio banking-stijl: actief item krijgt gouden pil + gouden linkerrand.
+        isActive &&
+          "bg-sidebar-accent text-sidebar-accent-foreground border-l-camil-gold-500 shadow-sm ring-camil-gold-700/40 border-l-[3px] ring-1",
         className,
       )}
     >

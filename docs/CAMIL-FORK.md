@@ -69,6 +69,15 @@ deep-link-schemes (later aanpassen vereist Apple-signing; zie §6).
 - **Eigen functionaliteit:** bij voorkeur als **addon** (`packages/addon-dev-tools`, `docs/addons/`) — blijft
   mergebaar met upstream; core-wijzigingen maken upstream-merges zwaarder.
 
+## 5b. Visuele aanpassingen (banking-stijl, 2026-09-12)
+
+Zie `STYLE-GUIDE.md` voor het volledige palet. Kort: lichte banking-stijl met
+goud-accent (`#C9A227`, altijd met donkere tekst), Inter-lettertype (was al
+standaard), NL-labels in sidebar en dashboard, “Mijn vermogen”-hero, snelle
+acties en Recente-transacties-widget. Technisch één ingreep (`globals.css`-tokens,
+light + dark) plus NL-waarden in de EN-locale; `Wealthfolio Connect`-naam en
+code-identifiers ongewijzigd. Logo-bestanden nog TODO.
+
 ## 6. Nog open (bewust uitgesteld)
 
 - Eigen logo/icon-set (sidebar, PWA, Tauri, `assets/brand` blijft onaangeroerd).
