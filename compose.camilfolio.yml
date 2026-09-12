@@ -1,0 +1,16 @@
+# Camilfolio — lokale Docker-setup (fork).
+# Bouwt de image uit deze repo (met Camilfolio-branding) i.p.v. de prebuilt upstream-image.
+# Gebruik:
+#   docker compose --env-file .env.docker -f compose.yml -f compose.camilfolio.yml up -d --build
+# Achter een reverse proxy (die zelf auth doet):
+#   docker compose --env-file .env.docker -f compose.yml -f compose.proxy.yml -f compose.camilfolio.yml up -d --build
+# Productie: zet in .env.docker een WF_AUTH_PASSWORD_HASH (Argon2id) en verwijder
+# WF_AUTH_REQUIRED=false hieronder (zie compose.yml-commentaar voor $-escaping).
+
+services:
+  wealthfolio:
+    build: .
+    image: camilfolio:latest
+    environment:
+      WF_AUTH_REQUIRED: "false"
+      WF_CORS_ALLOW_ORIGINS: "http://localhost:8088"
