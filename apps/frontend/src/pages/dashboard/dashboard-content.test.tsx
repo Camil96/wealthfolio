@@ -102,6 +102,14 @@ vi.mock("./top-holdings", () => ({
   default: () => <div>top-holdings</div>,
 }));
 
+vi.mock("./quick-actions", () => ({
+  QuickActions: () => <div>quick-actions</div>,
+}));
+
+vi.mock("./recent-transactions", () => ({
+  RecentTransactions: () => <div>recent-transactions</div>,
+}));
+
 const mockUseQuery = vi.mocked(useQuery);
 const mockUseCurrentValuation = vi.mocked(useCurrentValuation);
 const mockUseHoldings = vi.mocked(useHoldings);

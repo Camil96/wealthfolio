@@ -26,6 +26,8 @@ import { useTranslation } from "react-i18next";
 import { AccountsSummary } from "./accounts-summary";
 import Balance from "./balance";
 import SavingGoals from "./goals";
+import { QuickActions } from "./quick-actions";
+import { RecentTransactions } from "./recent-transactions";
 import TopHoldings from "./top-holdings";
 
 const DEFAULT_INTERVAL: UITimePeriod = "3M";
@@ -186,6 +188,10 @@ export function DashboardContent() {
         >
           <div className="flex items-start gap-2">
             <div>
+              <p className="text-muted-foreground text-xs font-semibold tracking-widest uppercase">
+                {t("dashboard:my_wealth")}
+              </p>
+              <div className="bg-camil-gold-500 mt-1 mb-1 h-[3px] w-12 rounded-full" />
               <Balance
                 isLoading={isCurrentValuationLoading}
                 isUnavailable={isCurrentValuationUnavailable}
@@ -267,6 +273,13 @@ export function DashboardContent() {
               />
             </div>
           )}
+        </div>
+
+        <div className="px-4 pt-6 md:px-6 lg:px-10">
+          <div className="mb-6">
+            <QuickActions />
+          </div>
+          <RecentTransactions />
         </div>
 
         <div className="grow px-4 pb-[var(--mobile-nav-total-offset)] pt-14 md:px-6 md:pb-6 md:pt-12 lg:px-10 lg:pb-8 lg:pt-14">

@@ -62,6 +62,12 @@
   --font-serif: "Merriweather", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
+  /* Camilfolio goud-accent (banking-stijl). Alleen met donkere tekst gebruiken. */
+  --camil-gold-100: #F7EFD2;
+  --camil-gold-300: #E3C565;
+  --camil-gold-500: #C9A227;
+  --camil-gold-700: #8A6D15;
+
   /* Disable default colors to prevent their use; feel free to re-enable as needed. */
   --color-amber-50: #fef3c7;
   --color-amber-100: #fde68a;
@@ -399,20 +405,21 @@
   --flexoki-ye: 45 99% 34%;
 
   /* Shadcn tokens as full HSL colors */
-  --background: hsl(var(--flexoki-bg));
-  --foreground: hsl(var(--flexoki-tx));
-  --card: hsl(var(--flexoki-bg-2));
-  --card-foreground: hsl(var(--flexoki-tx));
-  --popover: hsl(var(--flexoki-bg-2));
-  --popover-foreground: hsl(var(--flexoki-tx));
-  --primary: hsl(var(--flexoki-tx));
-  --primary-foreground: hsl(var(--flexoki-bg));
+  /* Camilfolio banking-stijl: witte achtergrond, donkere tekst, gouden accenten. */
+  --background: #FFFFFF;
+  --foreground: #1A1A1A;
+  --card: #F8F7F2;
+  --card-foreground: #1A1A1A;
+  --popover: #F8F7F2;
+  --popover-foreground: #1A1A1A;
+  --primary: var(--camil-gold-500);
+  --primary-foreground: #1A1A1A;
   --secondary: hsl(var(--flexoki-ui-2));
   --secondary-foreground: hsl(var(--flexoki-tx-2));
   --muted: hsl(var(--flexoki-ui));
   --muted-foreground: hsl(var(--flexoki-tx-2));
-  --accent: hsl(var(--flexoki-ui));
-  --accent-foreground: hsl(var(--flexoki-tx-2));
+  --accent: var(--camil-gold-100);
+  --accent-foreground: #1A1A1A;
   --destructive: hsl(var(--flexoki-re));
   --destructive-foreground: hsl(var(--flexoki-bg));
   --success: hsl(var(--flexoki-gr));
@@ -422,10 +429,10 @@
   --border: hsl(var(--flexoki-ui));
   --input: hsl(var(--flexoki-ui));
   --input-bg: hsl(var(--flexoki-bg));
-  --ring: hsl(var(--flexoki-ui-3));
+  --ring: var(--camil-gold-700);
 
-  /* Charts (allocation palette: forest / sage / sand / clay / plum + stone) */
-  --chart-1: #355c4c;
+  /* Charts: eerste serie is Camilfolio-goud, rest ongewijzigd. */
+  --chart-1: var(--camil-gold-500);
   --chart-2: #7e9f8c;
   --chart-3: #cbba8c;
   --chart-4: #c08a5f;
@@ -436,15 +443,15 @@
   --chart-9: hsl(51 21% 88%);
   --chart-stone: #b1aa9a;
 
-  /* Sidebar (full hsl colors) */
-  --sidebar: hsl(var(--flexoki-bg));
-  --sidebar-foreground: hsl(var(--flexoki-tx));
+  /* Sidebar (full hsl colors). Camilfolio: licht getinte sidebar + goud-accent. */
+  --sidebar: #F8F7F2;
+  --sidebar-foreground: #1A1A1A;
   --sidebar-primary: hsl(var(--flexoki-tx));
   --sidebar-primary-foreground: hsl(var(--flexoki-bg));
-  --sidebar-accent: hsl(var(--flexoki-ui));
-  --sidebar-accent-foreground: hsl(var(--flexoki-tx-2));
+  --sidebar-accent: var(--camil-gold-100);
+  --sidebar-accent-foreground: #1A1A1A;
   --sidebar-border: hsl(var(--flexoki-ui));
-  --sidebar-ring: hsl(var(--flexoki-ui-3));
+  --sidebar-ring: var(--camil-gold-700);
 
   --liquid-glass-bg: rgba(255, 255, 255, 0.05);
   --liquid-glass-border: rgba(255, 255, 255, 0.1);
@@ -480,6 +487,26 @@
 }
 
 .dark {
+  /* Camilfolio banking-stijl in het donker: oppervlakken verwijzen opnieuw naar
+     de Flexoki-dark-vars (hierboven), accenten worden goud. Nodig omdat :root
+     nu vaste lichte waarden gebruikt. */
+  --background: hsl(var(--flexoki-bg));
+  --foreground: hsl(var(--flexoki-tx));
+  --card: hsl(var(--flexoki-bg-2));
+  --card-foreground: hsl(var(--flexoki-tx));
+  --popover: hsl(var(--flexoki-bg-2));
+  --popover-foreground: hsl(var(--flexoki-tx));
+  --primary: var(--camil-gold-300);
+  --primary-foreground: #1A1A1A;
+  --accent: #3A2D04;
+  --accent-foreground: var(--camil-gold-300);
+  --ring: var(--camil-gold-300);
+  --sidebar: #282726;
+  --sidebar-foreground: hsl(var(--flexoki-tx));
+  --sidebar-accent: #3A2D04;
+  --sidebar-accent-foreground: var(--camil-gold-300);
+  --sidebar-ring: var(--camil-gold-300);
+
   /* Flexoki Dark Theme (HSL numeric components) */
   --flexoki-bg: 0 3% 6%;
   --flexoki-bg-2: 30 4% 11%;
@@ -493,10 +520,9 @@
   --flexoki-gr: 72 46% 41%;
   --flexoki-ye: 45 82% 45%;
 
-  /* Dark chart palette — same semantic hues as light (forest / sage / sand /
-     clay / plum + stone), tuned for the dark surface: forest is lifted for
-     contrast, the stones are pulled down so they stay calm instead of glaring. */
-  --chart-1: hsl(156 28% 44%);
+  /* Dark chart palette — eerste serie is Camilfolio-goud, rest als upstream
+     (zelfde semantische tinten als licht, afgestemd op donker oppervlak). */
+  --chart-1: var(--camil-gold-300);
   --chart-2: #7e9f8c;
   --chart-3: #cbba8c;
   --chart-4: #c08a5f;

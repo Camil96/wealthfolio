@@ -1,5 +1,23 @@
 # CHANGELOG-CAMIL (Camilfolio-fork)
 
+## 2026-09-12 — Banking-stijl (licht + goud)
+
+- `docs/STYLE-GUIDE.md`: palet (wit, donkere tekst, goud `#C9A227` met donkere tekst),
+  tokens, layout-regels. Hermes-pagina bleek blauw (`#0000F2`); goud is eigen keuze.
+- Sidebar: NL-labels (Overzicht, Inzichten, Portefeuille, Transacties, Doelen,
+  Assistent, Instellingen), standaard uitgeklapt, merknaam sans-bold, actief item
+  gouden pil + linkerrand. NL-zoektermen voor launcher.
+- Dashboard: “Mijn vermogen”-hero met gouden accentlijn, snelle acties
+  (Transactie toevoegen → `/activities/manage`, Doel aanmaken → `/goals/new`),
+  nieuwe widget Recente transacties (top-5), NL-titels (Rekeningen, Posities,
+  Mijn doelen). Nieuw: `quick-actions.tsx`, `recent-transactions.tsx`.
+- `globals.css`: `--camil-gold-*`-tokens; licht: witte achtergrond + gouden
+  primary/accent/sidebar/chart; donker behouden met goud-accent. Inter was al
+  standaard (geen Google Fonts). EN-locale draagt NL-waarden (documenteerd,
+  geen `nl/`-machinerie).
+- Verificatie: type-check, frontend-build (goud in CSS, NL in bundle), dashboard/
+  i18n-vitest, dev:web start schoon.
+
 ## Werkwijze
 
 - Werk altijd op een feature-branch (`feat/...`, `fix/...`), nooit direct op `main`.
