@@ -87,3 +87,24 @@ pnpm --filter frontend build    # output in ./dist
 pnpm run dev:web                # Vite :1420 + API 127.0.0.1:8088
 cargo check --manifest-path apps/server/Cargo.toml
 ```
+
+## 8. Self-hosted zonder Docker (native binary, aanbevolen route)
+
+Docker Desktop is te zwaar voor deze laptop en niet nodig: de release is één
+binary + `dist/`.
+
+```bash
+pnpm --filter frontend build
+cargo build --release --manifest-path apps/server/Cargo.toml
+# binary: ./target/release/wealthfolio-server (59 MB)
+WF_LISTEN_ADDR=127.0.0.1:8088 WF_DB_PATH=./db/app.db WF_STATIC_DIR=dist \
+  ./target/release/wealthfolio-server
+# check: /api/v1/healthz -> 200, / serveert <title>Camilfolio</title>
+```
+
+Benodigde env: `WF_SECRET_KEY` (verplicht), `WF_DB_PATH`, `WF_STATIC_DIR=dist`,
+`WF_CORS_ALLOW_ORIGINS`, voor lokale demo `WF_AUTH_REQUIRED=false`; productie met
+wachtwoord via `WF_AUTH_PASSWORD_HASH` (Argon2id). Bewezen op 2026-09-12:
+healthz 200 + Camilfolio-titel, SQLite netjes aangemaakt.
+Docker blijft alleen als VPS-optie achter de hand (`compose.camilfolio.yml` +
+`.env.docker`, nooit als dagelijkse route op deze laptop).

@@ -28,6 +28,18 @@ git push origin main
 Let op bij merges: eigen branding-bestanden (`index.html`, `manifest.json`, `tauri.conf.json`,
 `en/*.json`-strings, sidebar/login) aanklikken als “ours” bij conflict met upstream-rebrands.
 
+## 2026-09-12 — Native self-hosted zonder Docker (stap C/D/E)
+
+- Docker-route gestopt: te zwaar voor deze laptop. Sporen opgeruimd, Desktop blijft
+  geïnstalleerd maar uit (nodig voor andere projecten). `compose.camilfolio.yml` bewaard
+  als VPS-optie voor later.
+- Dagelijkse route = `pnpm run dev:web` (Vite :1420 + API :8088). Gemeten: <300 MB RAM,
+  geen VM, uren stabiel.
+- Native release: `cargo build --release` (7 min) -> `target/release/wealthfolio-server`
+  (59 MB). Getest op poort 8099 met verse SQLite: healthz 200, titel Camilfolio.
+- Demo zonder Docker: frontend builden, binary starten met `WF_STATIC_DIR=dist`,
+  openen op `http://127.0.0.1:8088`.
+
 ## 2026-09-12 — Initiële fork
 
 - Fork `Camil96/wealthfolio` aangemaakt van `wealthfolio/wealthfolio` (v3.9.0, commit `2a2d13c97`).

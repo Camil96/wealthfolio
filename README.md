@@ -865,7 +865,7 @@ cp -n .env.example .env; cp -n .env.web.example .env.web  # zet WF_SECRET_KEY (o
 pnpm run dev:web     # Vite http://localhost:1420 + API http://127.0.0.1:8088
 ```
 
-Docker (bouwt image uit deze fork):
+Docker (alleen voor VPS, niet nodig lokaal — zie `docs/CAMIL-FORK.md` §8):
 
 ```bash
 docker compose --env-file .env.docker -f compose.yml -f compose.camilfolio.yml up -d --build
