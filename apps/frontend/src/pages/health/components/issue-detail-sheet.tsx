@@ -652,27 +652,37 @@ export function IssueDetailSheet({
                                 </Link>
                               </Button>
                             ) : (
-                              <Button
+                              <ActionConfirm
                                 key={key}
-                                type="button"
-                                variant={action.primary ? "default" : "outline"}
-                                size="sm"
-                                disabled={isFixing}
-                                onClick={() =>
+                                confirmTitle={t("health:detail.fixConfirm.title")}
+                                confirmMessage={t("health:detail.fixConfirm.message")}
+                                confirmButtonText={t("health:detail.fixConfirm.confirm")}
+                                confirmButtonVariant="default"
+                                pendingText={t("health:detail.fixConfirm.pendingText")}
+                                isPending={isFixing}
+                                handleConfirm={() =>
                                   onRunFixAction({
                                     id: action.id,
                                     label: action.label,
                                     payload: action.payload,
                                   })
                                 }
-                              >
-                                {isFixing ? (
-                                  <Icons.Spinner className="mr-2 h-4 w-4 animate-spin" />
-                                ) : (
-                                  <Icons.Wand2 className="mr-2 h-4 w-4" />
-                                )}
-                                {action.label}
-                              </Button>
+                                button={
+                                  <Button
+                                    type="button"
+                                    variant={action.primary ? "default" : "outline"}
+                                    size="sm"
+                                    disabled={isFixing}
+                                  >
+                                    {isFixing ? (
+                                      <Icons.Spinner className="mr-2 h-4 w-4 animate-spin" />
+                                    ) : (
+                                      <Icons.Wand2 className="mr-2 h-4 w-4" />
+                                    )}
+                                    {action.label}
+                                  </Button>
+                                }
+                              />
                             ),
                           )}
                         </div>
@@ -760,14 +770,25 @@ export function IssueDetailSheet({
 
         <div className="shrink-0 space-y-2 border-t pt-4">
           {issue.fixAction && !hasDiagnosticActions && (
-            <Button onClick={onFix} disabled={isFixing} className="w-full">
-              {isFixing ? (
-                <Icons.Spinner className="mr-2 h-4 w-4 animate-spin" />
-              ) : (
-                <Icons.Wand2 className="mr-2 h-4 w-4" />
-              )}
-              {issue.fixAction.label}
-            </Button>
+            <ActionConfirm
+              confirmTitle={t("health:detail.fixConfirm.title")}
+              confirmMessage={t("health:detail.fixConfirm.message")}
+              confirmButtonText={t("health:detail.fixConfirm.confirm")}
+              confirmButtonVariant="default"
+              pendingText={t("health:detail.fixConfirm.pendingText")}
+              isPending={isFixing}
+              handleConfirm={onFix}
+              button={
+                <Button disabled={isFixing} className="w-full">
+                  {isFixing ? (
+                    <Icons.Spinner className="mr-2 h-4 w-4 animate-spin" />
+                  ) : (
+                    <Icons.Wand2 className="mr-2 h-4 w-4" />
+                  )}
+                  {issue.fixAction.label}
+                </Button>
+              }
+            />
           )}
 
           {issue.navigateAction && !hasDiagnosticActions && (

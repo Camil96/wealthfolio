@@ -17,6 +17,7 @@ import {
 } from "@wealthfolio/ui/components/ui/form";
 import { Switch } from "@wealthfolio/ui/components/ui/switch";
 import { usePlatform } from "@/hooks/use-platform";
+import { useShowAdvanced } from "@/lib/product-policy";
 import { useSettingsContext } from "@/lib/settings-provider";
 import { useNavigationMode } from "@/pages/layouts/navigation/navigation-mode-context";
 
@@ -31,6 +32,8 @@ export function AppearanceForm() {
   const { settings, updateSettings } = useSettingsContext();
   const { isMobile } = usePlatform();
   const { mode: navigationMode, setMode: setNavigationMode } = useNavigationMode();
+  // Camilfolio: Gevorderd-voorkeur, alleen dit apparaat (localStorage, geen backend)
+  const { showAdvanced, setShowAdvanced } = useShowAdvanced();
   const appearanceFormSchema = z.object({
     theme: z.enum(["light", "dark", "system"], {
       required_error: t("settings:appearance_theme_required"),
@@ -151,6 +154,17 @@ export function AppearanceForm() {
             )}
           />
         )}
+
+        <div className="flex items-center justify-between rounded-lg border p-3 shadow-sm">
+          <div className="space-y-0.5">
+            <p className="text-sm font-medium">{t("settings:appearance_show_advanced")}</p>
+            <p className="text-muted-foreground text-sm">
+              {t("settings:appearance_show_advanced_description")}{" "}
+              {t("settings:appearance_show_advanced_local_only")}
+            </p>
+          </div>
+          <Switch checked={showAdvanced} onCheckedChange={setShowAdvanced} />
+        </div>
       </div>
     </Form>
   );

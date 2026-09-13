@@ -5,11 +5,14 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { SidebarNav } from "./sidebar-nav";
+import { filterAdvancedItems, useShowAdvanced } from "@/lib/product-policy";
 
 export default function SettingsLayout() {
   const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
+  // Camilfolio: gevorderde secties alleen tonen als Gevorderd aanstaat
+  const { showAdvanced } = useShowAdvanced();
 
   const sections = useMemo(
     () => [
@@ -102,12 +105,14 @@ export default function SettingsLayout() {
             href: "ai-providers",
             subtitle: t("settings:nav.subtitles.ai_providers"),
             icon: <Icons.SparklesOutline className="size-5" />,
+            advanced: true,
           },
           {
             title: t("settings:nav.items.agent_access"),
             href: "agent-access",
             subtitle: t("settings:nav.subtitles.agent_access"),
             icon: <Icons.Brain className="size-5" />,
+            advanced: true,
           },
         ],
       },
@@ -156,7 +161,10 @@ export default function SettingsLayout() {
             </div>
             <div className="space-y-6 p-3 pb-[var(--mobile-nav-total-offset)] lg:p-4 lg:pb-4">
               {sections.map((section) => {
-                const mobileItems = section.items.filter((item) => item.href !== "agent-access");
+                const visibleItems = filterAdvancedItems(section.items, showAdvanced);
+                const mobileItems = visibleItems.filter(
+                  (item) => item.href !== "agent-access" || showAdvanced,
+                );
                 if (mobileItems.length === 0) return null;
 
                 return (
@@ -215,14 +223,18 @@ export default function SettingsLayout() {
           <div className="flex gap-10">
             <aside className="hidden w-[240px] shrink-0 lg:sticky lg:top-24 lg:flex lg:flex-col lg:self-start">
               <div className="space-y-6">
-                {sections.map((section) => (
-                  <div key={section.title} className="space-y-2">
-                    <div className="text-muted-foreground pl-2 text-sm font-light uppercase tracking-widest">
-                      {section.title}
+                {sections.map((section) => {
+                  const visibleItems = filterAdvancedItems(section.items, showAdvanced);
+                  if (visibleItems.length === 0) return null;
+                  return (
+                    <div key={section.title} className="space-y-2">
+                      <div className="text-muted-foreground pl-2 text-sm font-light uppercase tracking-widest">
+                        {section.title}
+                      </div>
+                      <SidebarNav items={visibleItems} />
                     </div>
-                    <SidebarNav items={section.items} />
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </aside>
             <div className="mb-8 min-w-0 flex-1">

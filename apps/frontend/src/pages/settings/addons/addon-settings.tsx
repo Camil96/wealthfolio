@@ -26,12 +26,15 @@ import { useToast } from "@wealthfolio/ui/components/ui/use-toast";
 import { useEffect, useMemo, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { SettingsHeader } from "../settings-header";
+import { useShowAdvanced } from "@/lib/product-policy";
 import { useAddonActions } from "./hooks/use-addon-actions";
 import { useAddonUpdates } from "./hooks/use-addon-updates";
 
 export default function AddonSettingsPage() {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<"installed" | "store">("installed");
+  // Camilfolio: publieke store alleen Gevorderd; geïnstalleerd + sideload blijven
+  const { showAdvanced } = useShowAdvanced();
   const [ratingDialog, setRatingDialog] = useState<{
     open: boolean;
     addonId?: string;
@@ -172,7 +175,7 @@ export default function AddonSettingsPage() {
         value={activeTab}
         onValueChange={(value: string) => setActiveTab(value as "installed" | "store")}
       >
-        <TabsList className="grid w-full grid-cols-2">
+        <TabsList className={`grid w-full ${showAdvanced ? "grid-cols-2" : "grid-cols-1"}`}>
           <TabsTrigger
             value="installed"
             className="flex items-center justify-center gap-1.5 sm:gap-2"
@@ -185,10 +188,12 @@ export default function AddonSettingsPage() {
               </Badge>
             )}
           </TabsTrigger>
+          {showAdvanced && (
           <TabsTrigger value="store" className="flex items-center justify-center gap-1.5 sm:gap-2">
             <Icons.Store className="h-4 w-4 flex-shrink-0" />
             <span className="truncate">{t("settings:addons_tab_available")}</span>
           </TabsTrigger>
+          )}
         </TabsList>
 
         <TabsContent value="installed" className="space-y-4">
@@ -300,7 +305,8 @@ export default function AddonSettingsPage() {
                   </PopoverContent>
                 </Popover>
 
-                {/* Browse Addons */}
+                {/* Browse Addons (alleen Gevorderd; sideload blijft) */}
+                {showAdvanced && (
                 <Button
                   variant="outline"
                   onClick={() => setActiveTab("store")}
@@ -310,6 +316,7 @@ export default function AddonSettingsPage() {
                   <span className="hidden sm:inline">{t("settings:addons_browse_button")}</span>
                   <span className="sm:hidden">{t("settings:addons_browse_short")}</span>
                 </Button>
+                )}
               </div>
             </div>
 
@@ -328,10 +335,12 @@ export default function AddonSettingsPage() {
                   {t("settings:addons_empty_description")}
                 </EmptyPlaceholder.Description>
                 <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:gap-3">
+                  {showAdvanced && (
                   <Button onClick={() => setActiveTab("store")} className="w-full sm:w-auto">
                     <Icons.Store className="mr-2 h-4 w-4" />
                     {t("settings:addons_browse_button")}
                   </Button>
+                  )}
                   <Button
                     variant="outline"
                     onClick={handleLoadAddon}
@@ -559,12 +568,14 @@ export default function AddonSettingsPage() {
           </div>
         </TabsContent>
 
+        {showAdvanced && (
         <TabsContent value="store">
           <AddonStoreBrowser
             installedAddonIds={installedAddonIds}
             onInstallSuccess={loadInstalledAddons}
           />
         </TabsContent>
+        )}
       </Tabs>
 
       {/* Permission Dialog */}

@@ -243,6 +243,12 @@
       "message": "This will hide the issue from your health center. It will reappear if the underlying data changes.",
       "pendingText": "Dismissing..."
     },
+    "fixConfirm": {
+      "title": "Deze oplossing uitvoeren?",
+      "message": "Dit past je financiële gegevens aan. Controleer eerst dat je een recente backup hebt.",
+      "confirm": "Uitvoeren",
+      "pendingText": "Bezig met uitvoeren..."
+    },
     "affectedItems_one": "Affected Item ({{count}})",
     "affectedItems_other": "Affected Items ({{count}})"
   }

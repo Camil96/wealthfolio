@@ -243,6 +243,12 @@
       "message": "這會在你的健康中心隱藏該問題。如果原始資料有變更，問題會再次出現。",
       "pendingText": "正在忽略……"
     },
+    "fixConfirm": {
+      "title": "要執行此修正嗎？",
+      "message": "這會變更你的財務資料。請先確認你有最近的備份。",
+      "confirm": "執行",
+      "pendingText": "正在執行……"
+    },
     "affectedItems_other": "受影響的項目（{{count}}）",
     "affectedItems_one": "受影響項目（{{count}}）"
   }

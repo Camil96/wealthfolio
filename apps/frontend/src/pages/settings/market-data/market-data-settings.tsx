@@ -25,6 +25,7 @@ import {
 import { QueryKeys } from "@/lib/query-keys";
 import type { CustomProviderWithSources } from "@/lib/types/custom-provider";
 import { cn } from "@/lib/utils";
+import { useShowAdvanced } from "@/lib/product-policy";
 import { ActionConfirm, useDateFormatting } from "@wealthfolio/ui";
 import {
   Collapsible,
@@ -626,6 +627,8 @@ export default function MarketDataSettingsPage() {
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [togglingId, setTogglingId] = useState<string | null>(null);
   const showHealthBanner = searchParams.get("healthContext") === "marketData";
+  // Camilfolio: eigen providers alleen Gevorderd; Yahoo + handmatig blijven
+  const { showAdvanced } = useShowAdvanced();
 
   // Split providers into built-in providers and the CUSTOM_SCRAPER aggregate
   const { builtinProviders, customScraperErrors } = useMemo(() => {
@@ -889,7 +892,7 @@ export default function MarketDataSettingsPage() {
       )}
 
       <Tabs defaultValue="builtin" className="w-full">
-        <TabsList className="grid w-full grid-cols-2">
+        <TabsList className={`grid w-full ${showAdvanced ? "grid-cols-2" : "grid-cols-1"}`}>
           <TabsTrigger value="builtin">
             {t("settings:market_data_page.tab_builtin")}
             {builtinProviders.filter((p) => p.enabled).length > 0 && (
@@ -898,6 +901,7 @@ export default function MarketDataSettingsPage() {
               </Badge>
             )}
           </TabsTrigger>
+          {showAdvanced && (
           <TabsTrigger value="custom">
             {t("settings:market_data_page.tab_custom")}
             {customProviders.filter((p) => p.enabled).length > 0 && (
@@ -906,6 +910,7 @@ export default function MarketDataSettingsPage() {
               </Badge>
             )}
           </TabsTrigger>
+          )}
         </TabsList>
 
         <TabsContent value="builtin" className="mt-4">
@@ -930,6 +935,7 @@ export default function MarketDataSettingsPage() {
           )}
         </TabsContent>
 
+        {showAdvanced && (
         <TabsContent value="custom" className="mt-4">
           <div className="mb-3 flex items-center justify-end">
             <Button
@@ -1022,6 +1028,7 @@ export default function MarketDataSettingsPage() {
             </div>
           )}
         </TabsContent>
+        )}
       </Tabs>
 
       <CustomProviderForm

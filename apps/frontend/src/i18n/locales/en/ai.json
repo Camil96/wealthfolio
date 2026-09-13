@@ -20,8 +20,8 @@
     "hideSidebar": "Hide sidebar"
   },
   "empty": {
-    "noProviderTitle": "No AI provider configured",
-    "noProviderDescription": "Connect an AI provider to start chatting with your personal finance assistant. Your data stays private and secure.",
+    "noProviderTitle": "De assistent is nog niet ingesteld.",
+    "noProviderDescription": "Kies zelf of je een lokale of externe AI-provider wilt gebruiken.",
     "configureProviders": "Configure AI Providers"
   },
   "model": {
