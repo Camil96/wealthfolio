@@ -263,9 +263,9 @@ function NavItem({ item, collapsed, className, ...props }: NavItemProps) {
       className={cn(
         "text-foreground [&_svg]:size-5! mb-1 h-12 rounded-md transition-all duration-300",
         collapsed ? "justify-center" : "justify-start",
-        // Camilfolio banking-stijl: actief item krijgt gouden pil + gouden linkerrand.
+        // Camilfolio trading-hermes-stijl: actief item krijgt blauwe pil + blauwe linkerrand.
         isActive &&
-          "bg-sidebar-accent text-sidebar-accent-foreground border-l-camil-gold-500 shadow-sm ring-camil-gold-700/40 border-l-[3px] ring-1",
+          "bg-sidebar-accent text-sidebar-accent-foreground border-l-camil-blue-500 shadow-sm ring-camil-blue-700/30 border-l-[3px] ring-1",
         className,
       )}
     >

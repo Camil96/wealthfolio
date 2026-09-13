@@ -1,65 +1,73 @@
-# Camilfolio Stijlgids — banking-stijl (licht + goud)
+# Camilfolio Stijlgids — trading-hermes-stijl (licht + blauw)
 
 > Fork-keuze, geen upstream-stijl. “EN”-locale draagt in deze fork Nederlandse waarden
 > (bewuste vereenvoudiging: geen `nl/`-locale, dus geen Rust- of lint-wijzigingen nodig).
-> Donkere modus blijft werken en krijgt hetzelfde goud-accent.
+> Donkere modus blijft werken en krijgt hetzelfde blauwe accent.
+>
+> Historie: eerst banking-stijl met goud; sinds de trading-hermes-richting is goud
+> volledig vervangen door blauw (geen goud-tokens meer in `globals.css`).
 
 ## 1. Herkomst
 
-- De Hermes-pagina (hermes-agent.nousresearch.com) is **ultramarijn blauw (#0000F2)**,
-  geen goud. Goud is een eigen Camilfolio-keuze voor een banking-uitstraling.
+- Hermes-blauw **`#0000F2`** is overgenomen van de Hermes-pagina
+  (hermes-agent.nousresearch.com), geverifieerd in de live bron. Die pagina zelf is
+  donkerblauw; “licht + blauw accent” is een eigen Camilfolio-interpretatie.
 - Lettertype: **Inter Variable**, al standaard (`globals.css`, gebundeld via fontsource).
-  Geen Google Fonts (app is offline-first). Cijfers/titels: Inter, geen serif voor merknaam.
+  Geen Google Fonts (app is offline-first). Bedragen altijd `tabular-nums`, datums numeriek.
 
 ## 2. Kleurenpalet
 
 | Gebruik | Light | Dark | Regel |
 |---|---|---|---|
-| Achtergrond | `#FFFFFF` | `#1C1B1A` (bestaand base-950) | pagina |
-| Kaarten | `#F8F7F2` | `#282726` (bestaand base-900) | widgets |
-| Tekst | `#1A1A1A` | `#E8E6DF` (bestaand tx) | altijd |
-| Secundaire tekst | `#575653` | `#8A887F` (bestaand tx-2) | bijschriften |
-| Goud vulling (knoppen, actieve pil) | `#C9A227` | `#C9A227` | **alleen met donkere tekst/icoon** (`#1A1A1A`, contrast ±7:1) |
-| Goud voor tekst op wit (links, randen) | `#8A6D15` | n.v.t. | contrast op wit ±5:1 |
-| Goud-tint (subtiele vlakken) | `#F7EFD2` | `#3A2D04` (yellow-900) | hover/selected-wash |
-| Goud in dark-modus (tekst/accent) | n.v.t. | `#E3C565` | contrast op donker ±7:1 |
+| Achtergrond | `#FFFFFF` | `#0B0D12` | pagina |
+| Oppervlak | `#F4F6FB` | `#141824` | sidebar, muted-vlakken |
+| Kaarten | `#FFFFFF` (rand `#E3E8F2`) | `#141824` | widgets |
+| Tekst | `#0B0D12` | `#F2F4FA` | altijd |
+| Secundaire tekst | `#4A5162` | bestaand tx-2 | bijschriften |
+| Blauw vulling (knoppen, actieve pil) | `#0000F2` | `#0000F2` | met witte tekst/icoon (contrast ±8:1) |
+| Blauw voor tekst op wit (links, randen) | `#0000F2` | n.v.t. | contrast op wit ±8:1 |
+| Blauw-tint (subtiele vlakken) | `#E5E7FF` | `#232A55` | hover/selected-wash |
+| Blauw in dark-modus (tekst/accent) | n.v.t. | `#8F9BFF` (afgeleid) | contrast op donker ±7:1 |
 | Succes / fout | bestaande groen/rood-tokens | bestaande dark-varianten | ongewijzigd |
 
-**Verboden:** witte tekst op goud (contrast < 3:1). Wit op `#8A6D15` mag wel (±4,6:1, alleen grote tekst).
+**Toegestaan:** witte tekst op blauw (contrast ±8:1, beide modi met eigen blauwtint).
 
 ## 3. Tokens (enige stijl-ingreep: `globals.css`)
 
 ```css
 @theme {
-  --camil-gold-100: #F7EFD2;
-  --camil-gold-300: #E3C565;
-  --camil-gold-500: #C9A227;
-  --camil-gold-700: #8A6D15;
+  --camil-blue-100: #E5E7FF;
+  --camil-blue-300: #8F9BFF;
+  --camil-blue-500: #0000F2;
+  --camil-blue-700: #0000C8;
 }
 :root {
   --background: #FFFFFF;
-  --card: #F8F7F2;
-  --foreground: #1A1A1A;
-  --primary: var(--camil-gold-500);
-  --primary-foreground: #1A1A1A;
-  --accent: var(--camil-gold-100);
-  --accent-foreground: #1A1A1A;
-  --ring: var(--camil-gold-700);
-  --sidebar-accent: var(--camil-gold-100);
-  --sidebar-accent-foreground: #1A1A1A;
-  --chart-1: var(--camil-gold-500);
+  --card: #FFFFFF;
+  --foreground: #0B0D12;
+  --primary: var(--camil-blue-500);
+  --primary-foreground: #FFFFFF;
+  --accent: var(--camil-blue-100);
+  --accent-foreground: #0B0D12;
+  --ring: var(--camil-blue-700);
+  --sidebar: #F4F6FB;
+  --sidebar-accent: var(--camil-blue-100);
+  --sidebar-accent-foreground: #0B0D12;
+  --chart-1: var(--camil-blue-500);
 }
 .dark {
-  --card: #282726;
-  --foreground: #E8E6DF;
-  --primary: var(--camil-gold-300);
-  --primary-foreground: #1A1A1A;
-  --accent: #3A2D04;
-  --accent-foreground: var(--camil-gold-300);
-  --ring: var(--camil-gold-300);
-  --sidebar-accent: #3A2D04;
-  --sidebar-accent-foreground: var(--camil-gold-300);
-  --chart-1: var(--camil-gold-300);
+  --background: #0B0D12;
+  --card: #141824;
+  --foreground: #F2F4FA;
+  --primary: var(--camil-blue-300);
+  --primary-foreground: #0B0D12;
+  --accent: #232A55;
+  --accent-foreground: var(--camil-blue-300);
+  --ring: var(--camil-blue-300);
+  --sidebar: #141824;
+  --sidebar-accent: #232A55;
+  --sidebar-accent-foreground: var(--camil-blue-300);
+  --chart-1: var(--camil-blue-300);
 }
 ```
 
@@ -69,15 +77,18 @@ tokens; geen Tailwind-config-wijziging nodig. Overige Flexoki-tokens blijven sta
 ## 4. Layout-regels
 
 - **Sidebar** (`app-sidebar.tsx`, 220px, standaard uitgeklapt): merknaam sans-bold,
-  iconen + NL-labels, actief item = goud-pil (`bg-sidebar-accent`) + 3px gouden
-  linkerrand. Collapse-toggle blijft.
+  iconen + NL-labels, actief item = blauwe pil (`bg-sidebar-accent`) + 3px blauwe
+  linkerrand. Structuur: 4 primair (Overzicht, Geld, Beleggen, Doelen) + 3 secundair
+  (Inzichten, Assistent, Instellingen). Collapse-toggle blijft.
 - **Bovenbalk**: ongewijzigd, erft tokens.
-- **Widgets**: bestaande Card-radius (`--radius`), lichte kaart-achtergrond, subtiele
-  schaduw (`shadow-sm`), gouden ring **alleen** rond actief/focus-element.
+- **Widgets**: bestaande Card-radius (`--radius`), witte kaart met rand (`--border`),
+  subtiele schaduw, blauwe ring **alleen** rond actief/focus-element. Kaarten alleen
+  bij inhoudelijke groepering; grafieken en tabellen staan direct op het oppervlak.
 - **Dashboard-volgorde**: Mijn Vermogen (hero) → grafiek → snelle acties →
   Recente transacties → Rekeningen → Grootste posities → Mijn Doelen.
-- **Teksten**: kort, geen jargon. Voorbeelden: “Mijn Vermogen”, “Recente transacties”,
-  “Transactie toevoegen”, “Doel aanmaken”, “Grootste posities”, “Rekeningen”.
+- **Teksten**: kort, geen jargon (jargon alleen met directe uitleg). Voorbeelden:
+  “Mijn Vermogen”, “Recente transacties”, “Transactie toevoegen”, “Doel aanmaken”,
+  “Grootste posities”, “Rekeningen”, “Portefeuille / Vermogen / Uitgaven” (tabs).
 
 ## 5. Bestanden per stap
 

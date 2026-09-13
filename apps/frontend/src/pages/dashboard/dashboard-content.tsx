@@ -191,7 +191,7 @@ export function DashboardContent() {
               <p className="text-muted-foreground text-xs font-semibold tracking-widest uppercase">
                 {t("dashboard:my_wealth")}
               </p>
-              <div className="bg-camil-gold-500 mt-1 mb-1 h-[3px] w-12 rounded-full" />
+              <div className="bg-camil-blue-500 mt-1 mb-1 h-[3px] w-12 rounded-full" />
               <Balance
                 isLoading={isCurrentValuationLoading}
                 isUnavailable={isCurrentValuationUnavailable}
