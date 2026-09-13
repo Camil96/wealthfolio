@@ -83,6 +83,8 @@
     "title": "Wealthfolio Connect",
     "subtitle": "自動同步券商資料，同時保護資料隱私。",
     "learnMore": "進一步瞭解 Connect",
+    "futureTitle": "同步功能日後提供",
+    "futureDescription": "裝置之間的同步功能尚未提供。現在可以完整在本機使用 Camilfolio。",
     "features": {
       "brokerageSync": {
         "title": "券商同步",

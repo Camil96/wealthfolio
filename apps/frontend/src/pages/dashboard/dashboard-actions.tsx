@@ -10,6 +10,7 @@ import {
   useUpdatePortfolioMutation,
 } from "@/hooks/use-calculate-portfolio";
 import { useRunHealthChecks } from "@/hooks/use-health";
+import { useShowAdvanced } from "@/lib/product-policy";
 import { Button } from "@wealthfolio/ui/components/ui/button";
 import { Icons } from "@wealthfolio/ui/components/ui/icons";
 import { useMemo, useState } from "react";
@@ -31,14 +32,15 @@ export function DashboardActions({ onAddAsset, onAddLiability }: DashboardAction
   const recalculatePortfolioMutation = useRecalculatePortfolioMutation();
   const runHealthChecksMutation = useRunHealthChecks({ navigate });
 
-  // Wealthfolio Connect sync
+  // Wealthfolio Connect sync (alleen Gevorderd; vendor, geen Camilfolio-dienst)
   const { isEnabled, isConnected, userInfo } = useWealthfolioConnect();
   const { mutate: syncBrokerData } = useSyncBrokerData();
-  const showSyncAction = isEnabled && isConnected && hasBrokerSync(userInfo);
+  const { showAdvanced } = useShowAdvanced();
+  const showSyncAction = showAdvanced && isEnabled && isConnected && hasBrokerSync(userInfo);
 
-  // Device sync
+  // Device sync (alleen Gevorderd tot eigen sync-infrastructuur bestaat)
   const { syncState } = useSyncStatus();
-  const showDeviceSyncAction = syncState === SyncStates.READY;
+  const showDeviceSyncAction = showAdvanced && syncState === SyncStates.READY;
 
   const groups = useMemo((): ActionPaletteGroup[] => {
     const primaryActions =

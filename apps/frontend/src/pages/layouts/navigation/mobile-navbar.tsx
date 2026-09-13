@@ -9,6 +9,7 @@ import { useCallback, useId, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { type NavLink, type NavigationProps, isPathActive } from "./app-navigation";
+import { useShowAdvanced } from "@/lib/product-policy";
 import { resolveNavigationIcon } from "./navigation-icons";
 
 interface MobileNavBarProps {
@@ -23,6 +24,8 @@ export function MobileNavBar({ navigation }: MobileNavBarProps) {
   const { triggerHaptic } = useHapticFeedback();
   const uniqueId = useId();
   const { status: syncStatus } = useAggregatedSyncStatus();
+  // Camilfolio: vendor-Connect alleen Gevorderd (route /connect blijft bestaan)
+  const { showAdvanced } = useShowAdvanced();
 
   const containerClassName = "pointer-events-none fixed inset-x-0 bottom-0 z-50";
 
@@ -61,11 +64,15 @@ export function MobileNavBar({ navigation }: MobileNavBarProps) {
   const standardMenuItems: NavLink[] = [
     ...primaryItems.slice(2),
     ...secondaryItems,
-    {
-      title: t("common:connect"),
-      href: "/connect",
-      icon: <SyncStatusIcon status={syncStatus} className="size-6" />,
-    },
+    ...(showAdvanced
+      ? [
+          {
+            title: t("common:connect"),
+            href: "/connect",
+            icon: <SyncStatusIcon status={syncStatus} className="size-6" />,
+          },
+        ]
+      : []),
   ];
   const moreItems = [...standardMenuItems, ...addonItems];
   const hasMenu = moreItems.length > 0;

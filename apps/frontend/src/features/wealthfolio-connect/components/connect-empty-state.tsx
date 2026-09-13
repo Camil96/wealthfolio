@@ -1,5 +1,3 @@
-import { ExternalLink } from "@/components/external-link";
-import { WEALTHFOLIO_CONNECT_PORTAL_URL } from "@/lib/constants";
 import { Button } from "@wealthfolio/ui/components/ui/button";
 import { Icons } from "@wealthfolio/ui/components/ui/icons";
 import { Link } from "react-router-dom";
@@ -57,6 +55,11 @@ export function ConnectEmptyState() {
           </div>
           <h1 className="mb-2 text-xl font-semibold tracking-tight">Wealthfolio Connect</h1>
           <p className="text-muted-foreground text-sm">{t("connect:emptyState.subtitle")}</p>
+          {/* Camilfolio: neutrale status, geen vendor-belofte */}
+          <p className="text-muted-foreground mt-3 text-sm font-medium">
+            {t("connect:emptyState.syncNeutralTitle")}:{" "}
+            {t("connect:emptyState.syncNeutralDescription")}
+          </p>
         </header>
 
         {/* Hero Diagram - constrained width */}
@@ -82,15 +85,9 @@ export function ConnectEmptyState() {
           })}
         </section>
 
-        {/* CTA */}
+        {/* CTA — Camilfolio: geen portal-marketing, alleen login voor testaccounts */}
         <footer className="flex flex-col items-center gap-4">
           <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center sm:justify-center">
-            <Button asChild className="from-primary to-primary/90 bg-linear-to-r w-full sm:w-auto">
-              <ExternalLink href={WEALTHFOLIO_CONNECT_PORTAL_URL}>
-                {t("connect:emptyState.getStarted")}
-                <Icons.ExternalLink className="ml-1.5 h-4 w-4" />
-              </ExternalLink>
-            </Button>
             <Button variant="outline" asChild className="w-full sm:w-auto">
               <Link to="/settings/connect">
                 <Icons.User className="mr-1.5 h-4 w-4" />
@@ -98,13 +95,6 @@ export function ConnectEmptyState() {
               </Link>
             </Button>
           </div>
-          <ExternalLink
-            href="https://wealthfolio.app/connect/"
-            className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1 text-xs transition-colors"
-          >
-            {t("connect:emptyState.learnMore")}
-            <Icons.ExternalLink className="h-3 w-3" />
-          </ExternalLink>
         </footer>
       </div>
     </div>

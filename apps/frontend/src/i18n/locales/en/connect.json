@@ -22,6 +22,8 @@
     "getStarted": "Get Started with Connect",
     "loginToAccount": "Login to your account",
     "learnMore": "Learn more about Connect",
+    "syncNeutralTitle": "Synchronisatie",
+    "syncNeutralDescription": "Synchronisatie tussen toestellen is nog niet ingesteld.",
     "features": {
       "brokerageSync": {
         "title": "Brokerage Sync",

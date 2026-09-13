@@ -25,6 +25,10 @@ export default function ConnectSettingsPage() {
             </div>
             <CardTitle>{t("settings:connect_not_configured_title")}</CardTitle>
             <CardDescription>{t("settings:connect_not_configured_desc")}</CardDescription>
+            {/* Camilfolio: neutrale status, geen vendor-belofte */}
+            <CardDescription className="mt-2 font-medium">
+              {t("settings:sync_not_configured_note")}
+            </CardDescription>
           </CardHeader>
         </Card>
       </div>

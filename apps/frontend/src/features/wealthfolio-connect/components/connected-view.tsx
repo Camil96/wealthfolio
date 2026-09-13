@@ -18,6 +18,7 @@ import { toast } from "@wealthfolio/ui/components/ui/use-toast";
 import { useCallback, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { hasBrokerSync, isSubscriptionStatusActive } from "../lib/plan-capabilities";
+import { useShowAdvanced } from "@/lib/product-policy";
 import { useWealthfolioConnect } from "../providers/wealthfolio-connect-provider";
 import {
   listBrokerAccounts,
@@ -370,6 +371,9 @@ export function ConnectedView() {
   // Check if user's plan includes broker sync
   const showBrokerSync = hasBrokerSync(userInfo);
 
+  // Camilfolio: vendor-promotie (plannen, upgrade) en device-sync-details alleen Gevorderd
+  const { showAdvanced } = useShowAdvanced();
+
   // Hooks - only fetch broker connections and accounts if user has broker sync
   const connectionsQuery = useBrokerConnections(showBrokerSync);
   const accountsQuery = useBrokerAccountsQuery(showBrokerSync);
@@ -504,7 +508,7 @@ export function ConnectedView() {
       )}
 
       {/* Show Subscription Plans if user has no active subscription (keep mounted during refresh) */}
-      {!isServiceUnavailable && !hasSubscription && !!userInfo && (
+      {!isServiceUnavailable && !hasSubscription && !!userInfo && showAdvanced && (
         <>
           <Alert role="status" className="bg-muted/30">
             <Icons.PauseCircle className="h-4 w-4" aria-hidden="true" />
@@ -589,10 +593,10 @@ export function ConnectedView() {
       )}
 
       {/* Device Sync Section - Only show if user has an active subscription */}
-      {hasSubscription && <DeviceSyncSection />}
+      {hasSubscription && showAdvanced && <DeviceSyncSection />}
 
       {/* Upgrade callout for basic plan users */}
-      {hasSubscription && !showBrokerSync && (
+      {hasSubscription && !showBrokerSync && showAdvanced && (
         <Card className="border-primary/20 bg-primary/5">
           <CardContent className="p-4">
             <div className="flex items-center justify-between gap-3">

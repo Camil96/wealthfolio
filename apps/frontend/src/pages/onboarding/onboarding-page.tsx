@@ -1,8 +1,6 @@
-import { ExternalLink } from "@/components/external-link";
 import { StartupError } from "@/components/startup-error";
 import { usePlatform } from "@/hooks/use-platform";
 import { useSettings } from "@/hooks/use-settings";
-import { WEALTHFOLIO_CONNECT_PORTAL_URL } from "@/lib/constants";
 import { useSettingsContext } from "@/lib/settings-provider";
 import { cn } from "@/lib/utils";
 import { Button } from "@wealthfolio/ui/components/ui/button";
@@ -153,14 +151,7 @@ const OnboardingPage = () => {
                 </Button>
               </div>
               <div className="order-1 flex flex-col gap-2 sm:order-2 sm:flex-row sm:gap-3">
-                {!isMobile && (
-                  <Button asChild variant="outline" className="order-2 sm:order-1">
-                    <ExternalLink href={WEALTHFOLIO_CONNECT_PORTAL_URL}>
-                      {t("onboarding:buttons.subscribeConnect")}
-                      <Icons.ExternalLink className="ml-1.5 h-4 w-4" />
-                    </ExternalLink>
-                  </Button>
-                )}
+                {/* Camilfolio: geen vendor-subscribe-CTA tijdens onboarding */}
                 <Button
                   data-testid="onboarding-finish-button"
                   className="from-primary to-primary/90 bg-linear-to-r order-1 sm:order-2"

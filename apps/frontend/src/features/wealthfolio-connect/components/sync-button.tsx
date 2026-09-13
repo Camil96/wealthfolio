@@ -6,6 +6,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@wealthfolio/ui/compone
 import { useTranslation } from "react-i18next";
 import { useAggregatedSyncStatus, useSyncBrokerData } from "../hooks";
 import { hasBrokerSync } from "../lib/plan-capabilities";
+import { useShowAdvanced } from "@/lib/product-policy";
 import { useWealthfolioConnect } from "../providers/wealthfolio-connect-provider";
 import type { AggregatedSyncStatus } from "../types";
 
@@ -39,8 +40,10 @@ export function SyncButton({ className, showLabel = false, size = "icon" }: Sync
   const { status, lastSyncTime } = useAggregatedSyncStatus();
   const { mutate: syncBrokerData, isPending: isSyncing } = useSyncBrokerData();
 
-  // Only show when Connect is enabled, connected, and plan includes broker sync
-  if (!isEnabled || !isConnected || !hasBrokerSync(userInfo)) {
+  // Only show when Connect is enabled, connected, and plan includes broker sync.
+  // Camilfolio: broker-sync-CTA alleen Gevorderd (vendor, geen Camilfolio-dienst).
+  const { showAdvanced } = useShowAdvanced();
+  if (!showAdvanced || !isEnabled || !isConnected || !hasBrokerSync(userInfo)) {
     return null;
   }
 

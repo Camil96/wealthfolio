@@ -8,6 +8,7 @@ import { useCallback, useId, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { type NavigationProps, isPathActive } from "./app-navigation";
+import { useShowAdvanced } from "@/lib/product-policy";
 import { resolveNavigationIcon } from "./navigation-icons";
 
 interface FloatingNavigationBarProps {
@@ -21,6 +22,7 @@ export function FloatingNavigationBar({ navigation }: FloatingNavigationBarProps
   const [overflowOpen, setOverflowOpen] = useState(false);
   const uniqueId = useId();
   const { status: syncStatus } = useAggregatedSyncStatus();
+  const { showAdvanced } = useShowAdvanced();
   const baseButtonClass =
     "text-foreground relative z-10 flex size-11 shrink-0 items-center justify-center rounded-full transition-colors";
 
@@ -119,7 +121,8 @@ export function FloatingNavigationBar({ navigation }: FloatingNavigationBarProps
                 <Icons.Search2 className="size-6" />
               </span>
             </button>
-            {/* Connect with status icon */}
+            {/* Connect with status icon (alleen Gevorderd; route blijft bestaan) */}
+            {showAdvanced && (
             <Link
               to="/connect"
               onClick={() =>
@@ -148,6 +151,7 @@ export function FloatingNavigationBar({ navigation }: FloatingNavigationBarProps
                 <SyncStatusIcon status={syncStatus} className="size-6" />
               </span>
             </Link>
+            )}
             {hasMoreItems && (
               <DropdownMenu open={overflowOpen} onOpenChange={setOverflowOpen}>
                 <DropdownMenuTrigger asChild>

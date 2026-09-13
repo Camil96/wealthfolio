@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import { type NavLink, type NavigationProps, isPathActive } from "./app-navigation";
 import { ConnectNavItem } from "./connect-nav-item";
+import { useShowAdvanced } from "@/lib/product-policy";
 import { resolveNavigationIcon } from "./navigation-icons";
 
 interface AppSidebarProps {
@@ -28,6 +29,8 @@ export function AppSidebar({ navigation }: AppSidebarProps) {
   const { t } = useTranslation();
   const [collapsed, setCollapsed] = useState(false);
   const { logout, requiresAuth } = useAuth();
+  // Camilfolio: vendor-Connect alleen Gevorderd (route /connect blijft bestaan)
+  const { showAdvanced } = useShowAdvanced();
   const addonMenuItems = navigation?.addonMenuItems ?? navigation?.addons ?? [];
 
   return (
@@ -146,7 +149,7 @@ export function AppSidebar({ navigation }: AppSidebarProps) {
               {navigation?.secondary?.map((item) => (
                 <NavItem key={item.title} item={item} collapsed={collapsed} />
               ))}
-              <ConnectNavItem collapsed={collapsed} />
+              {showAdvanced && <ConnectNavItem collapsed={collapsed} />}
               {isWeb && requiresAuth && (
                 <Button
                   type="button"

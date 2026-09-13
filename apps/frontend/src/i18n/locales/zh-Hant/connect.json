@@ -22,6 +22,8 @@
     "getStarted": "開始使用 Connect",
     "loginToAccount": "登入你的帳戶",
     "learnMore": "了解有關 Connect 的更多資訊",
+    "syncNeutralTitle": "同步",
+    "syncNeutralDescription": "裝置之間的同步尚未設定。",
     "features": {
       "brokerageSync": {
         "title": "券商同步",
