@@ -1,6 +1,12 @@
 {
   "title": "儀表板",
   "welcome_message": "歡迎使用 Wealthfolio",
+  "my_wealth": "我的資產",
+  "quick_actions": "快速動作",
+  "add_transaction": "新增交易",
+  "create_goal": "建立目標",
+  "recent_transactions": "最近交易",
+  "no_recent_transactions": "尚無交易。",
   "total_value": "總價值",
   "total_gain": "總損益",
   "total_gain_percent": "總損益率",

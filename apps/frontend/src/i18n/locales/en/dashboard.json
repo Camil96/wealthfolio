@@ -15,17 +15,17 @@
   "cash_balance": "Cash Balance",
   "invested": "Invested",
   "available_cash": "Available Cash",
-  "portfolio_summary": "Portfolio Summary",
+  "portfolio_summary": "Portefeuille-overzicht",
   "recent_activities": "Recente transacties",
   "top_holdings": "Grootste posities",
   "asset_allocation": "Asset Allocation",
   "performance_chart": "Performance Chart",
   "view_all": "Alles bekijken",
   "no_data": "Geen gegevens",
-  "sync_portfolio": "Sync Portfolio",
-  "last_updated": "Last updated",
-  "loading_portfolio": "Loading portfolio data...",
-  "error_loading": "Error loading portfolio data",
+  "sync_portfolio": "Portefeuille synchroniseren",
+  "last_updated": "Bijgewerkt",
+  "loading_portfolio": "Portefeuille laden...",
+  "error_loading": "Portefeuille laden mislukt",
   "last_3_months": "Last 3 months",
   "accounts": "Rekeningen",
   "account": "rekening",
@@ -74,9 +74,9 @@
     "time_due": "DUE"
   },
   "tabs": {
-    "investments": "Investments",
-    "net_worth": "Net Worth",
-    "spending": "Spending"
+    "investments": "Portefeuille",
+    "net_worth": "Vermogen",
+    "spending": "Uitgaven"
   },
   "holdings": {
     "title": "Posities",

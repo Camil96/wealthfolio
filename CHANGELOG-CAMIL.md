@@ -1,5 +1,18 @@
 # CHANGELOG-CAMIL (Camilfolio-fork)
 
+## 2026-09-13 — Fase A trading-hermes-richting (branch, niet gemergd)
+
+- Navigatie 4+3: Overzicht→`/dashboard`, Geld→`/activities` (tijdelijk, bankafschrift),
+  Beleggen→`/holdings` (tijdelijk, posities+verdeling), Doelen→`/goals`;
+  secundair Inzichten, Assistent, Instellingen. Alle routes behouden.
+- Thema: goud volledig eruit, Hermes-blauw `#0000F2` (bron geverifieerd) als primair;
+  dark-modus behouden met `#8F9BFF`. Alleen `globals.css`-tokens.
+- Overzicht: tabs Portefeuille/Vermogen/Uitgaven, NL-microcopy, hero ongewijzigd qua
+  structuur. zh-Hant-pariteit aangevuld (test eist gelijke keys).
+- Verificatie: build:types, type-check, frontend-build, 114 vitest-tests,
+  dev:web schoon (Vite 200, API 200, foutloze log). Wacht op visueel akkoord;
+  Fase B (hubs `/geld`, `/beleggen`) pas daarna.
+
 ## 2026-09-12 — Banking-stijl (licht + goud)
 
 - `docs/STYLE-GUIDE.md`: palet (wit, donkere tekst, goud `#C9A227` met donkere tekst),
