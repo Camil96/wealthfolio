@@ -67,6 +67,8 @@
   "login": "Login",
   "income": "Income",
   "dashboard": "Overzicht",
+  "money": "Geld",
+  "invest": "Beleggen",
   "symbol": "Symbol",
   "shares": "Shares",
   "fee": "Fee",
@@ -99,6 +101,8 @@
   "addons": "Add-ons",
   "nav": {
     "label_dashboard": "Overzicht bekijken",
+    "label_money": "Geld en transacties bekijken",
+    "label_invest": "Beleggingen bekijken",
     "label_insights": "Inzichten bekijken",
     "label_holdings": "Portefeuille bekijken",
     "label_activities": "Transacties bekijken",

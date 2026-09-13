@@ -26,6 +26,11 @@ type TFunction = ReturnType<typeof useTranslation>["t"];
 
 function buildStaticNavigation(t: TFunction): NavigationProps {
   return {
+    // Camilfolio trading-hermes-structuur: 4 taken primair (Overzicht, Geld,
+    // Beleggen, Doelen), de rest secundair. Geld en Beleggen verwijzen in
+    // Fase A tijdelijk naar de meest passende bestaande routes (/activities
+    // = bankafschrift, /holdings = posities + verdeling); eigen hubs volgen
+    // in Fase B. Alle routes blijven bestaan.
     primary: [
       {
         icon: <Icons.Dashboard className="size-6" />,
@@ -35,25 +40,27 @@ function buildStaticNavigation(t: TFunction): NavigationProps {
         label: t("common:nav.label_dashboard"),
       },
       {
-        icon: <Icons.Insight className="size-6" />,
-        title: t("common:insights"),
-        href: "/insights",
-        keywords: ["insights", "Analytics", "inzichten", "analyse"],
-        label: t("common:nav.label_insights"),
+        icon: <Icons.Wallet className="size-6" />,
+        title: t("common:money"),
+        href: "/activities",
+        keywords: ["transactions", "trades", "history", "transacties", "geld", "rekeningen"],
+        label: t("common:nav.label_money"),
       },
       {
         icon: <Icons.Holdings className="size-6" />,
-        title: t("common:holdings"),
+        title: t("common:invest"),
         href: "/holdings",
-        keywords: ["Holdings", "portfolio", "assets", "positions", "stocks", "portefeuille"],
-        label: t("common:nav.label_holdings"),
-      },
-      {
-        icon: <Icons.Activity className="size-6" />,
-        title: t("common:activities"),
-        href: "/activities",
-        keywords: ["transactions", "trades", "history", "transacties"],
-        label: t("common:nav.label_activities"),
+        keywords: [
+          "Holdings",
+          "portfolio",
+          "assets",
+          "positions",
+          "stocks",
+          "portefeuille",
+          "beleggen",
+          "rendement",
+        ],
+        label: t("common:nav.label_invest"),
       },
       {
         icon: <Icons.Goals className="size-6" />,
@@ -62,15 +69,22 @@ function buildStaticNavigation(t: TFunction): NavigationProps {
         keywords: ["goals", "fire", "retire", "retirement", "savings", "planner", "doelen", "sparen"],
         label: t("common:nav.label_goals"),
       },
+    ],
+    secondary: [
+      {
+        icon: <Icons.Insight className="size-6" />,
+        title: t("common:insights"),
+        href: "/insights",
+        keywords: ["insights", "Analytics", "inzichten", "analyse"],
+        label: t("common:nav.label_insights"),
+      },
       {
         icon: <Icons.Sparkles className="size-6" />,
         title: t("common:assistant"),
         href: "/assistant",
-        keywords: ["ai", "assistant", "chat", "help", "ask"],
+        keywords: ["ai", "assistant", "chat", "help", "ask", "assistent"],
         label: t("common:nav.label_assistant"),
       },
-    ],
-    secondary: [
       {
         icon: <Icons.Settings className="size-6" />,
         title: t("common:settings"),
