@@ -1,5 +1,17 @@
 # CHANGELOG-CAMIL (Camilfolio-fork)
 
+## Sprint chore/audit-flags — rustige standaard, Gevorderd per apparaat (branch, niet gemergd)
+
+- Nieuwe centrale voorkeur “Toon gevorderde functies” (Instellingen → Uiterlijk),
+  localStorage `camilfolio.showAdvanced`, default uit, alleen dit apparaat.
+- Verborgen standaard: Connect-nav (3 oppervlakken), dashboard-syncacties,
+  SyncButton, upgrade-callouts, DeviceSync-details, subscribe- en portal-CTA’s,
+  onboarding-promotie (neutrale toekomst-tekst), AI-provider/MCP-instellingen,
+  add-on-Store-tab, custom-providers. Assistent-nav blijft zichtbaar met
+  begrijpelijke leegstatus. Routes, backend, data en berekeningen ongewijzigd.
+- Health-fixes vragen nu expliciet om bevestiging (bestaande ActionConfirm).
+- i18n: NL-waarden in en/*, pariteit aangevuld in zh-Hant/*.
+
 ## 2026-09-13 — Fase A trading-hermes-richting (branch, niet gemergd)
 
 - Navigatie 4+3: Overzicht→`/dashboard`, Geld→`/activities` (tijdelijk, bankafschrift),
