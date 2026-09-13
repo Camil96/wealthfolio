@@ -16,7 +16,46 @@ const diagnosticMeta = {
 
 vi.mock("@wealthfolio/ui", async (importOriginal) => ({
   ...(await importOriginal<typeof import("@wealthfolio/ui")>()),
-  ActionConfirm: ({ button }: { button: React.ReactNode }) => <>{button}</>,
+  ActionConfirm: ({
+    button,
+    handleConfirm,
+    confirmButtonText,
+    confirmTitle,
+    confirmMessage,
+  }: {
+    button: React.ReactNode;
+    handleConfirm: () => void;
+    confirmButtonText?: string;
+    confirmTitle?: React.ReactNode;
+    confirmMessage?: React.ReactNode;
+  }) => {
+    // Camilfolio-testmock: simuleert het gesloten/open-dialoogmodel van de echte
+    // ActionConfirm. De bevestigingsknop bestaat pas na het openen via de
+    // actieknop, zodat de test bewijst dat er zonder bevestiging niets gebeurt.
+    const [isOpen, setIsOpen] = React.useState(false);
+    return (
+      <>
+        <span onClick={() => setIsOpen(true)} data-testid="action-confirm-trigger">
+          {button}
+        </span>
+        {isOpen ? (
+          <div role="dialog">
+            {confirmTitle ? <div>{confirmTitle}</div> : null}
+            {confirmMessage ? <div>{confirmMessage}</div> : null}
+            <button
+              type="button"
+              onClick={() => {
+                setIsOpen(false);
+                handleConfirm();
+              }}
+            >
+              {confirmButtonText}
+            </button>
+          </div>
+        ) : null}
+      </>
+    );
+  },
   Badge: ({ children }: { children: React.ReactNode }) => <span>{children}</span>,
   Button: ({
     children,
@@ -477,7 +516,15 @@ describe("IssueDetailSheet", () => {
     );
 
     await user.click(screen.getByRole("button", { name: /Sync Prices/i }));
+    // Camilfolio: fix-acties vragen eerst om bevestiging — dialoog moet open zijn,
+    // actie mag vóór bevestiging niet zijn uitgevoerd.
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Uitvoeren/i })).toBeInTheDocument();
+    expect(onRunFixAction).not.toHaveBeenCalled();
 
+    await user.click(screen.getByRole("button", { name: /Uitvoeren/i }));
+
+    expect(onRunFixAction).toHaveBeenCalledTimes(1);
     expect(onRunFixAction).toHaveBeenCalledWith(
       expect.objectContaining({ id: "sync_prices", payload: ["asset_xyz"] }),
     );
@@ -502,7 +549,15 @@ describe("IssueDetailSheet", () => {
     );
 
     await user.click(screen.getByRole("button", { name: /Rebuild History/i }));
+    // Camilfolio: fix-acties vragen eerst om bevestiging — dialoog moet open zijn,
+    // actie mag vóór bevestiging niet zijn uitgevoerd.
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Uitvoeren/i })).toBeInTheDocument();
+    expect(onRunFixAction).not.toHaveBeenCalled();
 
+    await user.click(screen.getByRole("button", { name: /Uitvoeren/i }));
+
+    expect(onRunFixAction).toHaveBeenCalledTimes(1);
     expect(onRunFixAction).toHaveBeenCalledWith(
       expect.objectContaining({ id: "rebuild_account_history", payload: ["acc-1"] }),
     );
